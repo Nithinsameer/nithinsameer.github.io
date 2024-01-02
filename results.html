@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gunometer Results</title>
+    <link rel="stylesheet" type="text/css" href="style1.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Your Gunometer Results</h1>
+        <div id="resultText">
+            <!-- The dominant guna result will be displayed here -->
+        </div>
+        <div id="gunaDescription">
+            <!-- The description of the dominant guna will be displayed here -->
+        </div>
+        <button id="restartButton">Restart Questionnaire</button>
+    </div>
+</body>
+</html>
+
+<script>
+    window.onload = function() {
+        // Parse the URL parameter to get the dominant guna
+        const urlParams = new URLSearchParams(window.location.search);
+        const dominantGuna = urlParams.get('guna');
+
+        // Define the descriptions for each guna
+        const gunaDescriptions = {
+            sattva: "Sattva is characterized by qualities of purity, wisdom, and harmony. It is associated with a clear, calm, and positive state of mind. Individuals dominated by Sattva are typically thoughtful, peaceful, and virtuous. They seek knowledge and are drawn towards spiritual practices. However, excessive Sattva can lead to attachment to knowledge and a sense of pride in one’s own righteousness or wisdom.",
+            rajas: "Rajas is marked by qualities of passion, activity, and restlessness. It drives ambition, desire, and a constant striving for achievement and enjoyment. People influenced by Rajas are often energetic, action-oriented, and motivated but can also be prone to agitation, dissatisfaction, and a relentless pursuit of worldly goals. Rajas can lead to a cycle of endless desires and the resultant frustration or unhappiness when these desires are unfulfilled.",
+            tamas: "Tamas is characterized by qualities of darkness, ignorance, laziness, and confusion. It is the state of inertia, inactivity, and materialistic tendencies. Individuals dominated by Tamas may exhibit resistance to change, a lack of motivation, and a sense of apathy or depression. Tamas can hinder clarity of thought, leading to delusion and misunderstanding of reality."
+        };
+
+        // Display the result and description
+        document.getElementById('resultText').innerText = `Your dominant guna is: ${dominantGuna.toUpperCase()}`;
+        document.getElementById('gunaDescription').innerText = gunaDescriptions[dominantGuna];
+
+        // Add an event listener to the restart button
+        document.getElementById('restartButton').addEventListener('click', function() {
+            window.location.href = 'index.html'; // Replace with the actual path to your questionnaire page if different
+        });
+
+    };
+</script>
