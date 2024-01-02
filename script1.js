@@ -41,9 +41,18 @@ function showPrevGroup() {
         document.querySelectorAll('.question').forEach(function(question) {
             var guna = question.getAttribute('data-guna');
             var selectedValue = question.querySelector('input[type="radio"]:checked');
-            if (selectedValue) {
+            if (!selectedValue) {
+                allAnswered = false;
+                // Optionally highlight unanswered questions here
+                question.style.border = "2px solid red"; // Highlight question in red
+            } else {
+                var guna = question.getAttribute('data-guna');
                 gunaScores[guna] += parseInt(selectedValue.value);
+                question.style.border = ""; // Remove highlight if answered
             }
+            // if (selectedValue) {
+            //     gunaScores[guna] += parseInt(selectedValue.value);
+            // }
         });
 
         //    //Display the result to the user
@@ -51,6 +60,11 @@ function showPrevGroup() {
         //     '\nSattva Score: ' + gunaScores.sattva + 
         //     '\nRajas Score: ' + gunaScores.rajas + 
         //     '\nTamas Score: ' + gunaScores.tamas);
+
+        if (!allAnswered) {
+            alert('Please answer all questions before submitting.');
+            return; // Exit the function if not all questions are answered
+        }
     
         let dominantGuna = Object.keys(gunaScores).reduce((a, b) => gunaScores[a] > gunaScores[b] ? a : b);
     
